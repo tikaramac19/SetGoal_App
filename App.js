@@ -2,8 +2,7 @@ import { StyleSheet, View, FlatList } from "react-native";
 import { useState } from "react";
 import GoalItem from "./components/GoalItem";
 import GoalInput from "./components/GoalInput";
-
-export default function App() {
+function App() {
   const [goals, setGoals] = useState([]);
 
   function addGoalHandler(enteredGoalText) {
@@ -23,8 +22,6 @@ export default function App() {
       return currentGoals.filter((goal) => goal.id !== id);
     });
   };
-
-  // console.log(goals)
 
   return (
     <View style={styles.appContainer}>
@@ -49,6 +46,8 @@ export default function App() {
     </View>
   );
 }
+
+export default App;
 
 const styles = StyleSheet.create({
   appContainer: {
