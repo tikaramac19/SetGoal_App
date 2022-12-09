@@ -2,16 +2,17 @@ import { StyleSheet, View, FlatList, Button, Image } from "react-native";
 import { useState } from "react";
 import GoalItem from "./components/GoalItem";
 import GoalInput from "./components/GoalInput";
+import { StatusBar } from "expo-status-bar";
 function App() {
   const [goals, setGoals] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
 
   function startAddGoalHandler() {
     setModalVisible(true);
-  };
+  }
 
-  function endCandleGoalHandler(){
-    setModalVisible(false)
+  function endCandleGoalHandler() {
+    setModalVisible(false);
   }
 
   function addGoalHandler(enteredGoalText) {
@@ -34,31 +35,38 @@ function App() {
   };
 
   return (
-    <View style={styles.appContainer}>
-      <Button
-        title="Add future goal !"
-        color="#5e0acc"
-        onPress={startAddGoalHandler}
-      />
-      <GoalInput visible={modalVisible} onAddGoal={addGoalHandler} onCancle={endCandleGoalHandler}/>
-      <View style={styles.goalsContainer}>
-        <FlatList
-          data={goals}
-          renderItem={(itemData) => {
-            return (
-              <GoalItem
-                text={itemData.item.text}
-                id={itemData.item.id}
-                deleteGoal={deleteGoalHandler}
-              />
-            );
-          }}
-          keyExtractor={(item) => {
-            return item.id;
-          }}
+    <>
+      <StatusBar  style="light"/>
+      <View style={styles.appContainer}>
+        <Button
+          title="Add future goal !"
+          color="#5e0acc"
+          onPress={startAddGoalHandler}
         />
+        <GoalInput
+          visible={modalVisible}
+          onAddGoal={addGoalHandler}
+          onCancle={endCandleGoalHandler}
+        />
+        <View style={styles.goalsContainer}>
+          <FlatList
+            data={goals}
+            renderItem={(itemData) => {
+              return (
+                <GoalItem
+                  text={itemData.item.text}
+                  id={itemData.item.id}
+                  deleteGoal={deleteGoalHandler}
+                />
+              );
+            }}
+            keyExtractor={(item) => {
+              return item.id;
+            }}
+          />
+        </View>
       </View>
-    </View>
+    </>
   );
 }
 
@@ -70,11 +78,10 @@ const styles = StyleSheet.create({
     paddingTop: 50,
     paddingBottom: 20,
     paddingHorizontal: 16,
-    backgroundColor:"#311b6b"
+    backgroundColor: "#311b6b",
   },
   goalsContainer: {
     flex: 5,
-    marginTop:15,
-    
+    marginTop: 15,
   },
 });

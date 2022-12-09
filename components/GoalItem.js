@@ -1,4 +1,5 @@
 import { StyleSheet, View, Text, Pressable } from "react-native";
+
 function GoalItem(props) {
   const deleteGoalHandler = () => {
     props.deleteGoal(props.id);
